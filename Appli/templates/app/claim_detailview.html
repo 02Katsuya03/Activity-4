@@ -1,0 +1,48 @@
+{% extends 'app/claim.html' %}
+
+{% block content %}
+  <div class="container mt-5">
+    <div class="custom-row justify-content-center">
+      <div class="col-md-6">
+        <div class="image-container">
+          {% if item.photo %}
+            <img src="{{ item.photo.url }}" alt="Item Photo" class="item-image" />
+          {% else %}
+            <img src="https://via.placeholder.com/400" alt="No Photo Available" class="item-image" />
+          {% endif %}
+        </div>
+
+        <div class="title-container">
+          <h2 class="item-title">{{ item.item_name|capfirst }}</h2>
+          <p>{{ item.item_id }}</p>
+          <p>
+            <strong>Category:</strong> {{ item.category|capfirst }}
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="description-container">
+          <strong>Description:</strong>
+          <p>{{ item.description }}</p>
+          <strong>Date Found:</strong>
+          <p>{{ item.date_found }}</p>
+          <strong>Location Found:</strong>
+          <p>{{ item.location_found }}</p>
+        </div>
+
+        <div class="other-details-container">
+          <strong>Found By:</strong>
+          <p>{{ item.found_by }}</p>
+          <strong>Contact Number:</strong>
+          <p>{{ item.contact_information }}</p>
+          <strong>School:</strong>
+          <p>{{ item.school }}</p>
+        </div>
+
+        <a href="{% url 'claim_viewitem' %}" class="btn btn-secondary">Back to Found Items</a>
+        <a href="{% url 'claim_procedure' item.id %}" class="btn btn-success mt-3">Claim Now</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}

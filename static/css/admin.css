@@ -1,0 +1,207 @@
+body,
+html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5f5dc;
+
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    margin-left: 60px;
+}
+
+.portal-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #297373;
+    font-size: 30px;
+    font-weight: bold;
+    padding: 90px;
+    border: 2px solid black;
+    border-radius: 12px;
+    width: 180px;
+    height: 180px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+    box-shadow: 0 6px #1a1a1a;
+    background-color: #FF6F61;
+}
+
+
+.portal-button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px #1a1a1a;
+}
+
+
+.portal-button:active {
+    transform: translateY(4px);
+    box-shadow: 0 2px #1a1a1a;
+}
+
+
+.button1 {
+    background-color: #FF6F61;
+}
+
+.button2 {
+    background-color: #FDFD96;
+}
+
+.button3 {
+    background-color: #8de68d;
+}
+
+.button1:hover {
+    background-color: #FF4F4F;
+    color: white;
+}
+
+.button2:hover {
+    background-color: #FFFF00;
+    color: #297373;
+}
+
+.button3:hover {
+    background-color: #52f752;
+    color: #297373;
+}
+
+.portal-button:hover {
+    color: black;
+}
+
+.portal-button img {
+    width: 30vh;
+    height: 30vh;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.portal-button:hover img {
+    transform: scale(1.1);
+}
+
+
+.sign-out-button {
+    margin-bottom: -540px;
+    margin-left: -30px;
+    background-color: #FFCCCB;
+    color: black;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    border: 1px solid black;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+    box-shadow: 0 6px #1a1a1a;
+}
+
+.sign-out-button img {
+    width: 45px;
+    height: auto;
+}
+
+
+.sign-out-button:hover {
+    background-color: #fd8888;
+    transform: translateY(-4px);
+    box-shadow: 0 10px #1a1a1a;
+}
+
+.sign-out-button:active {
+    transform: translateY(4px);
+    box-shadow: 0 2px #1a1a1a;
+}
+
+.school-button {
+    margin-bottom: -540px;
+    margin-left: 1050px;
+    background-color: #B19CD9;
+    color: black;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    border: 1px solid black;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+    box-shadow: 0 6px #1a1a1a;
+    position: fixed;
+    z-index: 10000;
+}
+
+.school-button img {
+    width: 45px;
+    height: auto;
+}
+
+
+.school-button:hover {
+    background-color: #9A7BCF;
+    transform: translateY(-4px);
+    box-shadow: 0 10px #1a1a1a;
+}
+
+.school-button:active {
+    transform: translateY(4px);
+    box-shadow: 0 2px #1a1a1a;
+}
+
+.navbar {
+    width: auto;
+    padding: 10px 20px;
+    background-color: #e6f7e6;
+    border: 1px solid #4caf50;
+    border-radius: 5px;
+
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #2e7d32;
+    flex-wrap: nowrap;
+}
+
+
+.navbar-message {
+    font-size: 14px;
+    color: #2e7d32;
+    font-weight: normal;
+}
+
+
+.navbar-user {
+    font-size: 25px;
+    color: #2e7d32;
+    text-align: left;
+    white-space: nowrap;
+}
+
+
+.welcome-message {
+    font-size: 25px;
+    color: #2e7d32;
+}
+
+
+.divider {
+    font-size: 27px;
+    color: #2e7d32;
+    margin: 0 10px;
+}

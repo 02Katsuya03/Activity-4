@@ -1,0 +1,71 @@
+{% extends 'app/user.html' %}
+
+{% block extra_css %}
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/user_found.css' %}" />
+{% endblock %}
+
+{% block content %}
+  <form action="{% url 'user_foundadditem' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="form-row">
+      <div class="left-column">
+        <div class="form-container item-container">
+          <div class="form-group">
+            <label for="item_name">Item Name:</label>
+            <input type="text" id="item_name" name="item_name" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" class="form-control"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="{{ form.category.id_for_label }}">Category:</label>
+            {{ form.category }}
+          </div>
+          <div class="form-group">
+            <label for="photo">Photo (optional):</label>
+            <input type="file" id="photo" name="photo" class="form-control" />
+          </div>
+        </div>
+
+        <div class="form-container date-location-container">
+          <div class="form-group">
+            <label for="{{ form.date_found.id_for_label }}">Date Found:</label>
+            {{ form.date_found }}
+          </div>
+          <div class="form-group">
+            <label for="location_found">Location Found:</label>
+            <input type="text" id="location_found" name="location_found" class="form-control" />
+          </div>
+        </div>
+      </div>
+
+      <div class="right-column">
+        <div class="form-container contact-container">
+          <div class="form-group">
+            <label for="found_by">Found By:</label>
+            <input type="text" id="found_by" name="found_by" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="contact_information">Contact Number:</label>
+            <input type="text" id="contact_information" name="contact_information" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="{{ form.school.id_for_label }}">School:</label>
+            {{ form.school }}
+          </div>
+          <button type="submit" class="save-button" value="Save">Submit</button>
+        </div>
+
+        <div class="form-container preview-container">
+          <div class="preview-box">
+            <p id="preview-text">Preview Image</p>
+            <img id="photo-preview" src="#" alt="Image Preview" style="display:none;" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+{% endblock %}

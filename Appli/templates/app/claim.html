@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <title> EduFinder </title>
+    <link rel="stylesheet" href="{% static 'css/claim.css' %}">
+    <link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+  <div class="sidebar">
+    <div class="logo-details">
+        <div class="logo_name">EduFinders</div>
+        <i class='bx bx-menu' id="btn" ></i>
+    </div>
+    <ul class="nav-list">
+      <li>
+        <a href="{% url 'administrator' %}">
+          <i class='bx bx-arrow-back' id="go_back"></i>
+
+          <span class="links_name">Go Back</span>
+        </a>
+        <span class="tooltip">Go Back</span>
+      </li>
+      <li>
+        <a href="{%  url 'claim_dashboard' %}">
+          <i class='bx bx-grid-alt'></i>
+          <span class="links_name">Dashboard</span>
+        </a>
+         <span class="tooltip">Dashboard</span>
+      </li>
+      <li>
+        <a href="{% url 'claim_viewitem' %}">
+          <i class='bx bx-detail'></i>
+          <span class="links_name">View Found Items</span>
+        </a>
+        <span class="tooltip">View Items</span>
+      </li>
+      <li>
+       <a href="{% url 'claim_claimitem' %}">
+        <i class='bx bxs-hand-right'></i>
+         <span class="links_name">Claimed Items</span>
+       </a>
+       <span class="tooltip">Claim Items</span>
+     </li>
+  
+     <li>
+       <a href="{% url 'claim_f2fstatus' %}">
+        <i class='bx bx-check-circle'></i>
+         <span class="links_name">Claim F2F Status</span>
+       </a>
+       <span class="tooltip">Claim F2f Status</span>
+     </li>
+
+     <li>
+      <a href="{% url 'claim_onlinestatus' %}">
+       <i class='bx bx-check-circle'></i>
+        <span class="links_name">Claim Online Status</span>
+      </a>
+      <span class="tooltip">Claim Online Status</span>
+    </li>
+
+     <li>
+      <a href="{% url 'claim_f2fclaim' %}">
+          <i class='bx bx-user-check'></i>
+          <span class="links_name">Face to Face Claims</span>
+      </a>
+      <span class="tooltip">Face to Face Claims</span>
+  </li>
+  
+  
+  <li>
+    <a href="{% url 'claim_userlist' %}">
+      <i class='bx bx-user-circle'></i>
+      <span class="links_name">User's List</span>
+    </a>
+    <span class="tooltip">User's List</span>
+  </li>
+  
+  <li>
+    <a href="{% url 'register_admin' %}">
+      <i class='bx bx-user-plus'></i>
+      <span class="links_name">Register Admin</span>
+    </a>
+    <span class="tooltip">Register Admin</span>
+  </li>
+  
+
+     <li class="profile">
+         <div class="profile-details">
+           <div class="name_job">
+            <div class="name">{{ user.first_name|capfirst }} {{ user.last_name|capfirst }}</div>
+             <div class="job">BSIT 3-4</div>
+           </div>
+         </div>
+         <i class='bx bx-log-out' id="log_out" ></i>
+     </li>
+    </ul>
+  </div>
+  <section class="home-section">
+    {% block content %}
+
+    {% endblock content %}    
+  </section>
+  <script>
+  let sidebar = document.querySelector(".sidebar");
+  let closeBtn = document.querySelector("#btn");
+  let searchBtn = document.querySelector(".bx-search");
+  closeBtn.addEventListener("click", ()=>{
+    sidebar.classList.toggle("open");
+    menuBtnChange();
+  });
+  searchBtn.addEventListener("click", ()=>{ 
+    sidebar.classList.toggle("open");
+    menuBtnChange(); 
+  });
+
+  function menuBtnChange() {
+   if(sidebar.classList.contains("open")){
+     closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+   }else {
+     closeBtn.classList.replace("bx-menu-alt-right","bx-menu");
+   }
+  }
+  </script>
+</body>
+</html>

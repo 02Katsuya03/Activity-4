@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+
+<body>
+    <div class="login-container">
+        <div class="title-column">
+            <a href="{% url 'intro' %}" class="back-link">
+                <img src="{% static 'img/back.png' %}" alt="Back" class="back-image">
+            </a>
+            <h2>Welcome to Edufinders</h2>
+            <p class="about-text">Edufinders is your reliable solution for finding and managing lost items within the
+                education community. Log in to report or find items effortlessly.</p>
+            <img src="{% static 'img/Signin.png' %}" alt="Back" class="image1">
+        </div>
+    </div>
+
+    <div class="form-column">
+        <form action="" method="post" id="student-login-form">
+            {% csrf_token %}
+
+            <div class="role-buttons">
+                <a href="{% url 'login_user' %}" class="role-button student-button">Student</a>
+
+                <a href="{% url 'login_admin' %}" class="role-button admin-button">Admin</a>
+
+            </div>
+            {% block content %}
+
+            {% endblock content %}
+    </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,127 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f5f5dc;
+    margin: 0;
+}
+
+.register-container {
+    background-color: #FDFD96;
+    width: 600px;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    margin-top: 500px;
+}
+
+.register-container h1 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+    margin-top: -30px;
+    margin-left: 20px;
+}
+
+.registration-image {
+    width: 30px;
+    height: auto;
+    cursor: pointer;
+    margin-left: -570px;
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    font-size: 14px;
+    color: #333;
+    margin-left: 15px;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"],
+select {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid black;
+    box-sizing: border-box;
+    margin-top: 5px;
+}
+
+select {
+    appearance: none;
+    background-color: #fff;
+    color: #333;
+    position: relative;
+}
+
+select::after {
+    content: "▼";
+    font-size: 12px;
+    color: #666;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.register-button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    color: black;
+    background-color: #9ac7fd;
+    border: 1px solid black;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    margin-top: 20px;
+}
+
+.register-button:hover {
+    background-color: #719ff3;
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .register-container {
+        width: 90%;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+
+    .form-group {
+        width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .register-container {
+        padding: 15px;
+    }
+}

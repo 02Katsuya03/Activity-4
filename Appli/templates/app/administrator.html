@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EduFinder</title>
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}" />
+    <link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon" />
+  </head>
+
+  <body>
+    <div class="container">
+      <a href="{% url 'lost_dashboard' %}" class="portal-button button1">
+        <img src="{% static 'img/lost.png' %}" alt="Lost Items Icon" />
+        <span>LOST ITEMS</span>
+      </a>
+      <a href="{% url 'found_dashboard' %}" class="portal-button button2">
+        <img src="{% static 'img/found.png' %}" alt="Found Items Icon" />
+        <span>FOUND ITEMS</span>
+      </a>
+      <a href="{% url 'claim_dashboard' %}" class="portal-button button3">
+        <img src="{% static 'img/insurance.png' %}" alt="Claim Items Icon" />
+        <span>CLAIM ITEMS</span>
+      </a>
+    </div>
+
+    <a href="{% url 'logout' %}" class="sign-out-button"><img src="{% static 'img/signout.png' %}" alt="Sign Out Icon" /></a>
+
+    <a href="{% url 'school_addschool' %}" class="school-button"><img src="{% static 'img/school.png' %}" alt="Sign Out Icon" /></a>
+  </body>
+</html>

@@ -1,0 +1,107 @@
+{% extends 'app/lost.html' %}
+
+{% block content %}
+<div class="container1">
+
+    <div class="dashboard">
+        <div class="dashboard-item">
+            <div class="custom-card">
+                <span class="dashboard-title">Total Users:</span>
+                <span class="dashboard-number">{{ total_users }}</span>
+            </div>
+        </div>
+        <div class="dashboard-item">
+            <div class="custom-card">
+                <span class="dashboard-title">Total Lost Items:</span>
+                <span class="dashboard-number">{{ total_lost_items }}</span>
+            </div>
+        </div>
+        <div class="dashboard-item">
+            <div class="custom-card">
+                <span class="dashboard-title">Total Found Items:</span>
+                <span class="dashboard-number">{{ total_found_items }}</span>
+            </div>
+        </div>
+        <div class="dashboard-item">
+            <div class="custom-card">
+                <span class="dashboard-title">Total Claims:</span>
+                <span class="dashboard-number">{{ total_claims }}</span>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="conclusion-container">
+        <div class="custom-card-conclusion">
+            <h3 class="conclusion-title">Conclusion</h3>
+            <p class="conclusion-text">
+                Based on the data, we have recorded a total of {{ total_lost_items }} lost items,
+                {{ total_found_items }} found items, and {{ total_claims }} claims.
+                {% if total_lost_items > total_found_items %}
+                The higher number of lost items compared to found items indicates a significant gap in our current
+                recovery efforts.
+                {% elif total_found_items > total_lost_items %}
+                The higher number of found items compared to lost items suggests that our current recovery efforts are
+                effective.
+                {% else %}
+                The balanced number of lost and found items indicates that our current tracking and recovery mechanisms
+                are functioning adequately.
+                {% endif %}
+                Moving forward, it is imperative to analyze the underlying causes of lost items and develop targeted
+                interventions to address these issues.
+            </p>
+        </div>
+    </div>
+
+
+    <div class="lost-items-container">
+        <div class="custom-card-lost-items">
+            <h3 class="lost-items-title">Lost Items</h3>
+            <table class="lost-items-table">
+                <thead>
+                    <tr>
+                        <th>Lost ID</th>
+                        <th>Name</th>
+                        <th>Date Lost</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in recent_claims %}
+                    <tr>
+                        <td>{{ item.item_id }}</td>
+                        <td>{{ item.item_name| capfirst }}</td>
+                        <td>{{ item.date_lost|date:"M d Y" }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="recent-items-section" id="recent-items">
+        <h3>Recently Added Items</h3>
+        <div class="recent-items-scroll">
+            {% for item in recent_claims %}
+            <div class="recent-item-card">
+                <div class="recent-item-card-img-container">
+                    {% if item.created_at.date == today %}
+                    <span class="badge bg-success">New</span>
+                    {% endif %}
+                    {% if item.photo %}
+                    <img src="{{ item.photo.url }}" alt="{{ item.item_name }}" class="recent-item-card-img">
+                    {% else %}
+                    <div class="no-photo-placeholder">No Photo</div>
+                    {% endif %}
+                </div>
+                <div class="recent-item-card-details">
+                    <h4 class="recent-item-card-title">{{ item.item_name|capfirst }}</h4>
+                    <p class="recent-item-card-category">{{ item.category }}</p>
+                    <p class="recent-item-card-date">{{ item.date_added|date:"M d Y" }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+    {% endblock content %}

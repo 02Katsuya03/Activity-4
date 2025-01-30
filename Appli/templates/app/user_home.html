@@ -1,0 +1,61 @@
+{% extends 'app/user.html' %}
+
+{% block content %}
+  {% load static %}
+  <div class="container1">
+    <div class="wrapper">
+      <img src="{% static 'img/1.png' %}" />
+      <img src="{% static 'img/2.png' %}" />
+      <img src="{% static 'img/3.png' %}" />
+    </div>
+  </div>
+  <div class="recent-items-wrapper">
+    <div class="recent-items-lost-section">
+      <h3>Recently Added Lost Items</h3>
+      <div class="recent-items-scroll">
+        {% for item in recent_lost_items %}
+          <div class="recent-item-card">
+            <div class="recent-item-card-img-container">
+              {% if item.photo %}
+                <img src="{{ item.photo.url }}" alt="{{ item.item_name }}" class="recent-item-card-img" />
+              {% else %}
+                <div class="no-photo-placeholder">No Photo</div>
+              {% endif %}
+            </div>
+            <div class="recent-item-card-details">
+              <h4 class="recent-item-card-title">{{ item.item_name|capfirst }}</h4>
+              <p class="recent-item-card-category">{{ item.category }}</p>
+              <p class="recent-item-card-date">{{ item.date_added|date:'M d, Y' }}</p>
+            </div>
+          </div>
+        {% empty %}
+          <p>No recent lost items.</p>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="recent-items-found-section">
+      <h3>Recently Added Found Items</h3>
+      <div class="recent-items-scroll">
+        {% for item in recent_found_items %}
+          <div class="recent-item-card">
+            <div class="recent-item-card-img-container">
+              {% if item.photo %}
+                <img src="{{ item.photo.url }}" alt="{{ item.item_name }}" class="recent-item-card-img" />
+              {% else %}
+                <div class="no-photo-placeholder">No Photo</div>
+              {% endif %}
+            </div>
+            <div class="recent-item-card-details">
+              <h4 class="recent-item-card-title">{{ item.item_name|capfirst }}</h4>
+              <p class="recent-item-card-category">{{ item.category }}</p>
+              <p class="recent-item-card-date">{{ item.date_added|date:'M d, Y' }}</p>
+            </div>
+          </div>
+        {% empty %}
+          <p>No recent found items.</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to Edufinders</title>
+    <link rel="stylesheet" href="{% static 'css/intro.css' %}" />
+  </head>
+  <body>
+    <h1>Welcome to <span class="edu">Edu</span><span class="finders">Finders</span></h1>
+    <p class="about-text">At Edufinders, we’re committed to helping students, educators, and institutions recover lost items and connect with each other. Our mission goes beyond just finding lost belongings; we strive to create a supportive community where everyone can share resources and experiences. Join us in making every academic journey smoother and more connected!</p>
+
+    <div class="btn-group">
+      <a href="{% url 'login_user' %}" class="btn1">
+        <img src="{% static 'img/Signin.png' %}" alt="Sign In" class="btn-icon" />
+        Sign In
+      </a>
+      <a href="{% url 'register_user' %}" class="btn2">
+        <img src="{% static 'img/Signup.png' %}" alt="Sign Up" class="btn-icon" />
+        Sign Up
+      </a>
+    </div>
+  </body>
+</html>

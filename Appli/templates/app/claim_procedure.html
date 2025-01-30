@@ -1,0 +1,84 @@
+{% extends 'app/claim.html' %}
+
+{% block content %}
+  <div class="claim-container mt-5">
+    <h2 class="claim-title text-center">Face-to-Face Claim Procedure for {{ found_item.item_id }}</h2>
+
+    <div class="claim-card p-4 shadow">
+      <form method="post" class="claim-form" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="claim-form-group">
+          <label for="item_id" class="claim-label">Item ID</label>
+          <input type="text" id="item_id" name="item_id" value="{{ found_item.item_id }}" class="claim-input" readonly />
+        </div>
+
+        <div class="claim-form-group">
+          <label for="item_name" class="claim-label">Item Name</label>
+          <input type="text" id="item_name" name="item_name" value="{{ found_item.item_name }}" class="claim-input" readonly />
+        </div>
+
+        <div class="claim-form-group">
+          <label for="{{ form.claimed_by.id_for_label }}" class="claim-label">{{ form.claimed_by.label }}</label>
+          {{ form.claimed_by }}
+        </div>
+
+        <div class="claim-form-group">
+          <label for="{{ form.school.id_for_label }}" class="claim-label">{{ form.school.label }}</label>
+          {{ form.school }}
+        </div>
+
+        <div class="claim-form-group">
+          <label for="{{ form.claimed_at.id_for_label }}" class="claim-label">{{ form.claimed_at.label }}</label>
+          {{ form.claimed_at }}
+        </div>
+
+        <div class="claim-form-group">
+          <label for="{{ form.required_documents.id_for_label }}" class="claim-label">{{ form.required_documents.label }}</label>
+          {{ form.required_documents }}
+        </div>
+
+        <div class="claim-form-group" id="document-upload-field">
+          <label for="document_image" class="claim-label">Upload Document Image</label>
+          <input type="file" id="document_image" name="document_image" class="claim-input" />
+
+          <div id="document-preview" class="mt-3" style="display: none;">
+            <img id="preview-img" src="#" alt="Document Preview" class="img-fluid rounded shadow" />
+          </div>
+        </div>
+
+        <div class="claim-form-group">
+          <label for="{{ form.contact_number.id_for_label }}" class="claim-label">{{ form.contact_number.label }}</label>
+          {{ form.contact_number }}
+        </div>
+
+        <div class="claim-button-group">
+          <button type="submit" class="claim-btn">Submit Claim</button>
+          <a href="{% url 'claim_viewitem' %}" class="claim-btn">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var fileInput = document.getElementById('document_image')
+      var previewContainer = document.getElementById('document-preview')
+      var previewImage = document.getElementById('preview-img')
+    
+      fileInput.addEventListener('change', function () {
+        var file = this.files[0]
+        if (file) {
+          var reader = new FileReader()
+          reader.onload = function (e) {
+            previewImage.src = e.target.result
+            previewContainer.style.display = 'block'
+          }
+          reader.readAsDataURL(file)
+        } else {
+          previewContainer.style.display = 'none'
+        }
+      })
+    })
+  </script>
+{% endblock %}

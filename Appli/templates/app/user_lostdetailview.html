@@ -1,0 +1,52 @@
+{% extends 'app/user.html' %}
+
+{% block extra_css %}
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/user_lost.css' %}" />
+{% endblock %}
+
+{% block content %}
+  <div class="container mt-5">
+    <div class="custom-row justify-content-center">
+      <div class="col-md-6">
+        <div class="image-container">
+          {% if item.photo %}
+            <img src="{{ item.photo.url }}" alt="Item Photo" class="item-image" />
+          {% else %}
+            <img src="https://via.placeholder.com/400" alt="No Photo Available" class="item-image" />
+          {% endif %}
+        </div>
+
+        <div class="title-container">
+          <h2 class="item-title">{{ item.item_name|capfirst }}</h2>
+          <p>{{ item.item_id }}</p>
+          <p>
+            <strong>Category:</strong> {{ item.category|capfirst }}
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="description-container">
+          <strong>Description:</strong>
+          <p>{{ item.description }}</p>
+          <strong>Date Lost:</strong>
+          <p>{{ item.date_lost }}</p>
+          <strong>Location Lost:</strong>
+          <p>{{ item.location_lost }}</p>
+        </div>
+
+        <div class="other-details-container">
+          <strong>Lost By:</strong>
+          <p>{{ item.lost_by }}</p>
+          <strong>Contact Number:</strong>
+          <p>{{ item.contact_information }}</p>
+          <strong>School:</strong>
+          <p>{{ item.school }}</p>
+        </div>
+
+        <a href="{% url 'user_lostviewitem' %}" class="btn btn-secondary">Back to Lost Items</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}

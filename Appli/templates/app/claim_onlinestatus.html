@@ -1,0 +1,113 @@
+{% extends 'app/claim.html' %}
+
+{% block content %}
+<div class="row align-items-center mb-4">
+    <div class="col-md-6">
+      <h1>Pending Online Claims</h1>
+    </div>
+    <div class="col-md-6 d-flex justify-content-end">
+        <form method="get" class="d-flex align-items-center justify-content-end">
+            
+            <input type="text" name="q" class="form-control me-2" placeholder="Search by Item Name or Claimed By"
+                value="{{ request.GET.q|default:'' }}">
+        
+            
+            <select name="claim_type" class="form-select me-2">
+                <option value="">All Claim Types</option>
+                <option value="Face-to-Face" {% if request.GET.claim_type == 'Face-to-Face' %}selected{% endif %}>Face-to-Face</option>
+                <option value="Online" {% if request.GET.claim_type == 'Online' %}selected{% endif %}>Online</option>
+            </select>
+
+            
+            <button type="submit" name="order_by" value="asc" class="btn btn-outline-primary me-2">
+                <i class="fas fa-sort-alpha-up"></i>
+            </button>
+            <button type="submit" name="order_by" value="desc" class="btn btn-outline-primary">
+                <i class="fas fa-sort-alpha-down"></i>
+            </button>
+        
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+    </div>
+  </div>
+  
+
+
+<table class="table table-striped mt-4">
+    <thead>
+        <tr>
+            <th>Found Item</th>
+            <th>Claimed By</th>
+            <th>Claim At</th>
+            <th>School</th>
+            <th>Claim Type</th>
+            <th>Document Type</th>
+            <th>Document</th>
+            <th>Status</th>  
+        </tr>
+    </thead>
+    <tbody>
+        {% for claim in claims %}
+        <tr>
+            <td>{{ claim.found_item.item_name }}</td>
+            <td>{{ claim.claimed_by }}</td>
+            <td>{{ claim.claimed_at|date:"Y-m-d" }}</td>
+            <td>{{ claim.found_item.school }}</td>
+            <td>{{ claim.claim_type }}</td>
+            <td>{{ claim.get_required_documents_display }}</td>
+
+            
+            <td>
+                {% if claim.document_image %}
+                    <a href="{{ claim.document_image.url }}" target="_blank">
+                        <img src="{{ claim.document_image.url }}" alt="Document" style="max-width: 80px; border-radius: 5px;">
+                    </a>
+                {% else %}
+                    <span class="text-muted">No Document</span>
+                {% endif %}
+            </td>
+
+            
+            <td>
+                <form method="POST" action="{% url 'update_online_claim' claim.id %}">
+                    {% csrf_token %}
+                    <select name="status" id="status-{{ claim.id }}" onchange="this.form.submit()">
+                        <option value="pending" {% if claim.status == 'pending' %}selected{% endif %}>Pending</option>
+                        <option value="in_progress" {% if claim.status == 'in_progress' %}selected{% endif %}>In Progress</option>
+                        <option value="approved" {% if claim.status == 'approved' %}selected{% endif %}>Approved</option>
+                        <option value="completed" {% if claim.status == 'completed' %}selected{% endif %}>Completed</option>
+                        <option value="rejected" {% if claim.status == 'rejected' %}selected{% endif %}>Rejected</option>
+                    </select>
+                </form>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="8" class="text-center">No matching claims found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+<div class="pagination">
+    <span class="step-links">
+      {% if page_obj.has_previous %}
+      <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+      {% endif %}
+  
+      {% for num in page_obj.paginator.page_range %}
+      {% if num == page_obj.number %}
+      <span class="current">{{ num }}</span>
+      {% else %}
+      <a href="?page={{ num }}">{{ num }}</a>
+      {% endif %}
+      {% endfor %}
+  
+      {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}">Next</a>
+      {% endif %}
+    </span>
+  </div>
+  
+{% endblock %}
