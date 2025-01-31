@@ -178,11 +178,11 @@ class IntroPageView(TemplateView):
 class LoginBasePageView(TemplateView):
     template_name = "app/login_base.html"
 
-
+@method_decorator(login_required, name="dispatch")
 class AdminPageView(TemplateView):
     template_name = "app/administrator.html"
 
-
+@method_decorator(login_required, name="dispatch")
 class LostPageView(LoginRequiredMixin, TemplateView):
     template_name = "app/lost.html"
     login_url = "/login/"
@@ -194,11 +194,11 @@ class LostPageView(LoginRequiredMixin, TemplateView):
         context["last_name"] = user.last_name if user.last_name else "User"
         return context
 
-
+@method_decorator(login_required, name="dispatch")
 class UserPageView(TemplateView):
     template_name = "app/user.html"
 
-
+@method_decorator(login_required, name="dispatch")
 class LostView(TemplateView):
     template_name = "app/lost.html"
 
@@ -423,7 +423,7 @@ class LostDeleteItemView(DeleteView):
 class FoundView(TemplateView):
     template_name = "app/found.html"
 
-
+@method_decorator(login_required, name="dispatch")
 class LostUsersListView(ListView):
     model = Profile
     template_name = "app/lost_userlist.html"
@@ -661,7 +661,7 @@ class FoundDeleteItemView(DeleteView):
         profile = self.request.user.profile
         return super().delete(request, *args, **kwargs)
 
-
+@method_decorator(login_required, name="dispatch")
 class FoundUsersListView(ListView):
     model = Profile
     template_name = "app/found_userlist.html"
@@ -702,7 +702,7 @@ class FoundUsersListView(ListView):
         context["schools"] = School.objects.only("id", "name")
         return context
 
-
+@method_decorator(login_required, name="dispatch")
 class ClaimDashboardView(ListView):
     template_name = "app/claim_dashboard.html"
     model = F2FClaim
@@ -729,7 +729,7 @@ class ClaimDashboardView(ListView):
 
         return context
 
-
+@method_decorator(login_required, name="dispatch")
 class ClaimViewItem(ListView):
     template_name = "app/claim_viewitem.html"
     model = FoundItem
@@ -776,7 +776,7 @@ class ClaimViewItem(ListView):
         """Returns True if the item was created today."""
         return item.created_at.date() == date.today()
 
-
+@method_decorator(login_required, name="dispatch")
 class ClaimItemListView(ListView):
     template_name = "app/claim_claimitem.html"
     context_object_name = "claims"
@@ -828,7 +828,7 @@ class ClaimDetailView(DetailView):
         item_id = self.kwargs.get("item_id")
         return get_object_or_404(FoundItem, item_id=item_id)
 
-
+@method_decorator(login_required, name="dispatch")
 class F2FListView(ListView):
     model = F2FClaim
     template_name = "app/claim_f2fclaim.html"
@@ -845,7 +845,7 @@ class F2FListView(ListView):
         ).count()
         return context
 
-
+@method_decorator(login_required, name="dispatch")
 class ClaimUsersListView(ListView):
     model = Profile
     template_name = "app/claim_userlist.html"
@@ -886,7 +886,7 @@ class ClaimUsersListView(ListView):
         context["schools"] = School.objects.all()
         return context
 
-
+@method_decorator(login_required, name="dispatch")
 class UserHomeView(TemplateView):
     template_name = "app/user_home.html"
 
@@ -903,7 +903,7 @@ class UserHomeView(TemplateView):
 
         return context
 
-
+@method_decorator(login_required, name="dispatch")
 class UserLostAddItemView(LoginRequiredMixin, CreateView):
     model = LostItem
     form_class = LostItemForm
@@ -917,7 +917,7 @@ class UserLostAddItemView(LoginRequiredMixin, CreateView):
 
         return super().form_valid(form)
 
-
+@method_decorator(login_required, name="dispatch")
 class UserLostListView(LoginRequiredMixin, ListView):
     template_name = "app/user_lostlistview.html"
     model = LostItem
@@ -964,7 +964,7 @@ class UserLostListView(LoginRequiredMixin, ListView):
         """Returns True if the item was created today."""
         return item.created_at.date() == date.today()
 
-
+@method_decorator(login_required, name="dispatch")
 class UserLostUpdateItemView(UpdateView):
     model = LostItem
     fields = [
@@ -984,7 +984,7 @@ class UserLostUpdateItemView(UpdateView):
 
         return get_object_or_404(LostItem, item_id=self.kwargs["item_id"])
 
-
+@method_decorator(login_required, name="dispatch")
 class UserLostDeleteItemView(DeleteView):
     model = LostItem
     success_url = reverse_lazy("user_lostlistview")
@@ -999,7 +999,7 @@ class UserLostDeleteItemView(DeleteView):
         profile = self.request.user.profile
         return super().delete(request, *args, **kwargs)
 
-
+@method_decorator(login_required, name="dispatch")
 class UserLostViewItem(LoginRequiredMixin, ListView):
     template_name = "app/user_lostviewitem.html"
     model = LostItem
@@ -1048,7 +1048,7 @@ class UserLostViewItem(LoginRequiredMixin, ListView):
         """Returns True if the item was created today."""
         return item.created_at.date() == date.today()
 
-
+@method_decorator(login_required, name="dispatch")
 class UserLostDetailView(DetailView):
     model = LostItem
     template_name = "app/user_lostdetailview.html"
@@ -1059,7 +1059,7 @@ class UserLostDetailView(DetailView):
         item_id = self.kwargs.get("item_id")
         return LostItem.objects.get(item_id=item_id)
 
-
+@method_decorator(login_required, name="dispatch")
 class UserFoundAddItemView(LoginRequiredMixin, CreateView):
     model = FoundItem
     form_class = FoundItemForm
@@ -1073,7 +1073,7 @@ class UserFoundAddItemView(LoginRequiredMixin, CreateView):
 
         return super().form_valid(form)
 
-
+@method_decorator(login_required, name="dispatch")
 class UserFoundListView(LoginRequiredMixin, ListView):
     template_name = "app/user_foundlistview.html"
     model = FoundItem
@@ -1115,7 +1115,7 @@ class UserFoundListView(LoginRequiredMixin, ListView):
         """Returns True if the item was created today."""
         return item.created_at.date() == date.today()
 
-
+@method_decorator(login_required, name="dispatch")
 class UserFoundUpdateItemView(UpdateView):
     model = FoundItem
     fields = [
@@ -1135,7 +1135,7 @@ class UserFoundUpdateItemView(UpdateView):
 
         return get_object_or_404(FoundItem, item_id=self.kwargs["item_id"])
 
-
+@method_decorator(login_required, name="dispatch")
 class UserFoundDeleteItemView(DeleteView):
     model = FoundItem
     success_url = reverse_lazy("found_listview")
@@ -1150,7 +1150,7 @@ class UserFoundDeleteItemView(DeleteView):
         profile = self.request.user.profile
         return super().delete(request, *args, **kwargs)
 
-
+@method_decorator(login_required, name="dispatch")
 class UserFoundViewItem(ListView):
     template_name = "app/user_foundviewitem.html"
     model = FoundItem
@@ -1197,7 +1197,7 @@ class UserFoundViewItem(ListView):
         """Returns True if the item was created today."""
         return item.created_at.date() == date.today()
 
-
+@method_decorator(login_required, name="dispatch")
 class UserFoundDetailView(DetailView):
     model = FoundItem
     template_name = "app/user_founddetailview.html"
@@ -1207,7 +1207,7 @@ class UserFoundDetailView(DetailView):
         item_id = self.kwargs.get("item_id")
         return get_object_or_404(FoundItem, item_id=item_id)
 
-
+@method_decorator(login_required, name="dispatch")
 class ClaimProcedureView(CreateView):
     model = ClaimProcedure
     form_class = F2FClaimProcedureForm
@@ -1252,7 +1252,7 @@ class ClaimProcedureView(CreateView):
         )
         return redirect("claim_f2fstatus")
 
-
+@method_decorator(login_required, name="dispatch")
 class OnlineClaimProcedureView(CreateView):
     model = OnlineClaimProcedure
     form_class = OnlineClaimProcedureForm
@@ -1294,7 +1294,7 @@ class OnlineClaimProcedureView(CreateView):
         )
         return redirect("user_foundviewitem")
 
-
+@method_decorator(login_required, name="dispatch")
 class ClaimF2FStatusView(ListView):
     model = ClaimProcedure
     template_name = "app/claim_f2fstatus.html"
@@ -1332,7 +1332,7 @@ class ClaimF2FStatusView(ListView):
 
         return queryset
 
-
+@method_decorator(login_required, name="dispatch")
 class OnlineClaimStatusView(ListView):
     model = OnlineClaimProcedure
     template_name = "app/claim_onlinestatus.html"
@@ -1445,7 +1445,7 @@ def update_online_claim_status(request, claim_id):
 
     return redirect("claim_onlinestatus")
 
-
+@method_decorator(login_required, name="dispatch")
 class OnlineListView(ListView):
     model = OnlineClaim
     template_name = "app/user_onlineclaim.html"
@@ -1462,18 +1462,18 @@ class OnlineListView(ListView):
         ).count()
         return context
 
-
+@method_decorator(login_required, name="dispatch")
 class School(TemplateView):
     template_name = "app/school.html"
 
-
+@method_decorator(login_required, name="dispatch")
 class SchoolCreateView(CreateView):
     model = School
     form_class = SchoolForm
     template_name = "app/school_addschool.html"
     success_url = reverse_lazy("school_listview")
 
-
+@method_decorator(login_required, name="dispatch")
 class SchoolListView(ListView):
     model = School
     template_name = "app/school_listview.html"
@@ -1485,7 +1485,7 @@ class SchoolListView(ListView):
 
         return School.objects.all().order_by("name")
 
-
+@method_decorator(login_required, name="dispatch")
 class SchoolUpdateView(UpdateView):
     from Appli.models import School
 
@@ -1497,7 +1497,7 @@ class SchoolUpdateView(UpdateView):
     def get_success_url(self):
         return reverse_lazy("school_listview")
 
-
+@method_decorator(login_required, name="dispatch")
 class SchoolDeleteView(DeleteView):
     from Appli.models import School
 
